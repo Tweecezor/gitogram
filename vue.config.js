@@ -1,7 +1,7 @@
 const path = require("path");
 const vueSrc = "./src";
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "/dist/gitogram/" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/gitogram/dist/" : "/",
   css: {
     modules: true
   },
