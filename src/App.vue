@@ -11,4 +11,8 @@ export default {
   }
 };
 </script>
-<style src="./global.scss" lang="scss"></style>
+<style src="./global.scss" lang="scss">
+p {
+  color: red;
+}
+</style>
