@@ -3,19 +3,13 @@
 </template>
 
 <script>
-import * as icons from "../../assets/icons";
+import * as icons from "@/assets/icons";
 console.log(icons);
 export default {
   name: "Icon",
-
-  setup() {
-    return {};
-  },
-
   components: {
     ...icons
   },
-
   props: {
     iconName: {
       required: true,
@@ -24,6 +18,10 @@ export default {
         return Object.keys(icons).includes(name);
       }
     }
+  },
+
+  setup() {
+    return {};
   }
 };
 </script>

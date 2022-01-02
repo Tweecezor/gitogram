@@ -1,28 +1,41 @@
 <template>
   <div class="topline">
     <topline class="mb-32">
-      <template class="topline__wrap" #headline>
+      <template #headline class="topline__wrap">
         <div class="topline__title_wrap">
-          <h1 class="topline__title">Gitogram/</h1>
+          <h1 class="topline__title">
+            Gitogram/
+          </h1>
         </div>
         <div class="topline__actions">
           <div class="topline__icon mr-28">
-            <icon iconName="home" />
+            <icon icon-name="home" />
           </div>
           <div class="topline__avatar mr-24">
-            <avatar avatar="https://picsum.photos/300/300" />
+            <avatar :avatar="user.avatar_url" />
           </div>
           <div class="topline__icon mt-4">
-            <icon iconName="exit" />
+            <icon icon-name="exit" @click="logout" />
           </div>
         </div>
       </template>
       <template #content>
         <ul class="stories__list">
-          <li class="stories__item" v-for="item in stories" :key="item.id">
+          <li
+            v-for="item in getUnStarredOnly"
+            :key="item.id"
+            class="stories__item"
+            @click="
+              $router.push({
+                name: 'Stories',
+                params: { initialSlide: Number(item.id) }
+              })
+            "
+          >
+            <!-- <pre>{{ item }}</pre> -->
             <userStoryItem
-              :avatar="item.avatar"
-              :username="item.username"
+              :avatar="item.owner.avatar_url"
+              :username="item.owner.login"
               @handlePress="onPressAvatar(item.id)"
             />
           </li>
@@ -32,32 +45,53 @@
   </div>
   <div class="feeds">
     <div class="x-container">
-      <div class="feeds__list">
-        <div class="feeds__item feed">
-          <feed>
+      <ul class="feeds__list">
+        <li
+          v-for="item in starred"
+          :key="item.id"
+          class="feeds__item feed mb-24"
+        >
+          <!-- <pre>{{ item }}</pre> -->
+          <feed
+            :username="item.owner.login"
+            :avatar="item.owner.avatar_url"
+            :repo-id="item.id"
+            :issues="item.issues"
+            :repo="item.name"
+            :owner="item.owner.login"
+          >
             <template #card>
               <card
-                title="Vue js"
-                desc="lorem lorem lorem loremv lorem lorem lorem lorem"
-                :stars="5"
-                :forks="10"
+                :title="item.name"
+                :desc="item.description"
+                :stars="item.stargazers_count"
+                :forks="item.forks_count"
               />
             </template>
           </feed>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
+// import { trendings as trendingsModule } from "@/API";
+
 import { topline } from "../../components/topline";
 import { icon } from "../../components/icon";
 import { userStoryItem } from "../../components/userStoryItem";
 import { avatar } from "@/components/avatar";
 import { feed } from "@/components/feed";
 import { card } from "@/components/card";
+// import { button as myButton } from "@/components/button";
+// import { progress as Progress } from "@/components/progress";
+// import { slide } from "@/components/slide";
+
 import stories from "./data.json";
+
+import { mapActions, mapGetters, mapState } from "vuex";
+
 export default {
   components: {
     topline,
@@ -66,15 +100,39 @@ export default {
     avatar,
     feed,
     card
+    // myButton,
+    // Progress
+    // slide
   },
   data() {
     return {
       stories
+      // repos: []
     };
   },
+
+  computed: {
+    ...mapState({
+      trendings: state => state.trendings,
+      user: state => state.user,
+      starred: state => state.starred
+    }),
+    ...mapGetters(["getUnStarredOnly"])
+  },
+
+  async created() {
+    await this.getStarred();
+    await this.getUser();
+    await this.getTrendings();
+  },
+
   methods: {
+    ...mapActions(["getTrendings", "getUser", "logout", "getStarred"]),
     onPressAvatar(id) {
       console.log(id);
+    },
+    handleClick() {
+      console.log("evnt in feeds");
     }
   }
 };
@@ -108,5 +166,13 @@ export default {
   &__list {
     padding: 0 9%;
   }
+}
+
+.button {
+  width: 270px;
+}
+
+.slide {
+  width: 375px;
 }
 </style>

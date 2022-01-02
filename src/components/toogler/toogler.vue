@@ -1,8 +1,12 @@
 <template>
-  <button @click="onToogle" class="button" :class="{ active: isOpen }">
+  <button
+    class="button"
+    :class="{ active: isOpen }"
+    @click="onToogle"
+  >
     <span class="text mr-4">{{ isOpen ? "Hide issues" : "View issues" }}</span>
     <span class="icon">
-      <icon iconName="triangle" />
+      <icon icon-name="triangle" />
     </span>
   </button>
 </template>
@@ -10,6 +14,10 @@
 <script>
 import { icon } from "@/components/icon";
 export default {
+
+  components: {
+    icon
+  },
   setup() {
     return {};
   },
@@ -18,10 +26,6 @@ export default {
     return {
       isOpen: false
     };
-  },
-
-  components: {
-    icon
   },
 
   methods: {

@@ -1,19 +1,22 @@
 <template>
   <div class="avatar">
-    <img :src="avatar" alt="users avatar" />
+    <img
+      :src="avatar"
+      alt="users avatar"
+    >
   </div>
 </template>
 
 <script>
 export default {
-  setup() {
-    return {};
-  },
   props: {
     avatar: {
       type: String,
       required: true
     }
+  },
+  setup() {
+    return {};
   }
 };
 </script>

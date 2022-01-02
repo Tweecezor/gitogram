@@ -2,10 +2,13 @@
   <div class="topline">
     <div class="x-container">
       <div class="headline">
-        <slot name="headline"></slot>
+        <slot name="headline" />
       </div>
-      <div class="content" v-if="$slots.content">
-        <slot name="content"></slot>
+      <div
+        v-if="$slots.content"
+        class="content"
+      >
+        <slot name="content" />
       </div>
     </div>
   </div>
@@ -32,5 +35,6 @@ export default {
 .headline {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 </style>

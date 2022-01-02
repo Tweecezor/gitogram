@@ -1,14 +1,21 @@
 <template>
   <div class="card">
     <div class="card__title_wrap mb-16">
-      <h2 class="card__title">{{ title }}</h2>
+      <h2 class="card__title">
+        {{ title }}
+      </h2>
     </div>
     <div class="card__desc_wrap mb-32">
-      <div class="card__desc">{{ desc }}</div>
+      <div class="card__desc">
+        {{ desc }}
+      </div>
     </div>
 
     <div class="card__stats">
-      <stats :stars="stars" :forks="forks" />
+      <stats
+        :stars="stars"
+        :forks="forks"
+      />
     </div>
   </div>
 </template>
@@ -16,8 +23,9 @@
 <script>
 import { stats } from "@/components/stats";
 export default {
-  setup() {
-    return {};
+
+  components: {
+    stats
   },
   props: {
     desc: {
@@ -37,9 +45,8 @@ export default {
       required: true
     }
   },
-
-  components: {
-    stats
+  setup() {
+    return {};
   }
 };
 </script>

@@ -2,26 +2,30 @@
   <div class="stats">
     <div class="stats__border stats__right">
       <div class="stats__icon mr-4">
-        <icon iconName="stars" />
+        <icon icon-name="stars" />
       </div>
       <span>Star</span>
     </div>
-    <div class="stats__border">{{ stars }}</div>
+    <div class="stats__border">
+      {{ stars }}
+    </div>
     <div class="stats__border ">
       <div class="stats__icon mr-4">
-        <icon iconName="forks" />
+        <icon icon-name="forks" />
       </div>
       <span>Forks</span>
     </div>
-    <div class="stats__border stats__left">{{ forks }}</div>
+    <div class="stats__border stats__left">
+      {{ forks }}
+    </div>
   </div>
 </template>
 
 <script>
 import { icon } from "@/components/icon";
 export default {
-  setup() {
-    return {};
+  components: {
+    icon
   },
   props: {
     stars: {
@@ -33,8 +37,8 @@ export default {
       required: true
     }
   },
-  components: {
-    icon
+  setup() {
+    return {};
   }
 };
 </script>

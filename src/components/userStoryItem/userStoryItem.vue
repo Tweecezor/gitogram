@@ -1,17 +1,22 @@
 <template>
   <div class="userStoryItem">
-    <button class="userStoryItem__button" @click="onPress">
+    <button
+      class="userStoryItem__button"
+      @click="onPress"
+    >
       <avatar :avatar="avatar" />
     </button>
-    <div class="username">{{ username }}</div>
+    <div class="username">
+      {{ username }}
+    </div>
   </div>
 </template>
 
 <script>
 import { avatar } from "../avatar";
 export default {
-  setup() {
-    return {};
+  components: {
+    avatar
   },
   props: {
     avatar: {
@@ -23,8 +28,8 @@ export default {
       required: true
     }
   },
-  components: {
-    avatar
+  setup() {
+    return {};
   },
   methods: {
     onPress() {
