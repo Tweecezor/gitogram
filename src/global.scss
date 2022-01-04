@@ -168,6 +168,10 @@ button {
 .fl {
 	display: flex;
 }
+.fl-ju-between {
+	display: flex;
+	justify-content: space-between;
+}
 
 .pointer {
 	&:hover {

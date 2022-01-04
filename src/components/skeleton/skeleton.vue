@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="skeleton"
-    :style="style"
-  />
+  <div class="skeleton" :style="style" />
 </template>
 
 <script>
@@ -17,13 +14,23 @@ export default {
     height: {
       type: Number,
       default: 5
+    },
+    circle: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
-    const style = reactive({
+    let style = reactive({
       width: `${props.width}px`,
       height: `${props.height}px`
     });
+    if (props.circle) {
+      style = {
+        ...style,
+        "border-radius": "50%"
+      };
+    }
 
     return { style };
   }

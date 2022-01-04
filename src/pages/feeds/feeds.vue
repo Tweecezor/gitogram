@@ -13,9 +13,11 @@
           </div>
           <div class="topline__avatar mr-24 icon">
             <avatar
+              v-if="user.avatar_url"
               :avatar="user.avatar_url"
               @click="$router.push({ name: 'Repos' })"
             />
+            <Skeleton v-else :width="44" :height="44" circle />
           </div>
           <div class="topline__icon mt-4 icon">
             <icon icon-name="exit" @click="logout" />
@@ -23,7 +25,12 @@
         </div>
       </template>
       <template #content>
-        <ul class="stories__list">
+        <ul class="fl-ju-between" v-if="loadingStoryItem">
+          <li v-for="(item, ndx) in 10" :key="ndx">
+            <Skeleton :width="102" :height="102" circle />
+          </li>
+        </ul>
+        <ul v-else class="stories__list">
           <li
             v-for="item in getUnStarredOnly"
             :key="item.id"
@@ -36,6 +43,7 @@
             "
           >
             <!-- <pre>{{ item }}</pre> -->
+
             <userStoryItem
               :avatar="item.owner.avatar_url"
               :username="item.owner.login"
@@ -54,7 +62,6 @@
           :key="item.id"
           class="feeds__item feed mb-24"
         >
-          <!-- <pre>{{ item }}</pre> -->
           <feed
             :username="item.owner.login"
             :avatar="item.owner.avatar_url"
@@ -62,14 +69,16 @@
             :issues="item.issues"
             :repo="item.name"
             :owner="item.owner.login"
-            :date="item.updated_at"
+            :date="new Date(item.updated_at)"
           >
             <template #card>
               <card
+                class="feeds__card"
                 :title="item.name"
-                :desc="item.description"
+                :desc="item.description || ''"
                 :stars="item.stargazers_count"
                 :forks="item.forks_count"
+                @click="goToRepo(item.full_name)"
               />
             </template>
           </feed>
@@ -88,6 +97,7 @@ import { userStoryItem } from "../../components/userStoryItem";
 import { avatar } from "@/components/avatar";
 import { feed } from "@/components/feed";
 import { card } from "@/components/card";
+import { skeleton as Skeleton } from "@/components/skeleton";
 // import { button as myButton } from "@/components/button";
 // import { progress as Progress } from "@/components/progress";
 // import { slide } from "@/components/slide";
@@ -103,14 +113,16 @@ export default {
     userStoryItem,
     avatar,
     feed,
-    card
+    card,
+    Skeleton
     // myButton,
     // Progress
     // slide
   },
   data() {
     return {
-      stories
+      stories,
+      loadingStoryItem: true
       // repos: []
     };
   },
@@ -129,6 +141,7 @@ export default {
     await this.getStarred();
     await this.getUser();
     await this.getTrendings();
+    this.loadingStoryItem = false;
   },
 
   methods: {
@@ -138,6 +151,11 @@ export default {
     },
     handleClick() {
       console.log("evnt in feeds");
+    },
+    goToRepo(fullname) {
+      console.log(fullname);
+      // window.location.href = ;
+      window.open(`https://github.com/${fullname}`, "_blank");
     }
   }
 };
@@ -170,6 +188,11 @@ export default {
 .feeds {
   &__list {
     padding: 0 9%;
+  }
+  &__card {
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 

@@ -1,7 +1,8 @@
 <template>
   <div class="feed">
     <div class="feed__user mb-16">
-      <avatar class="feed__avatar mr-12" :avatar="avatar" />
+      <avatar v-if="avatar" class="feed__avatar mr-12" :avatar="avatar" />
+      <skeleton v-else :width="44" :height="44" circle />
       <span class="feed__username">{{ username }}</span>
     </div>
     <div class="feed__card mb-16">
@@ -36,12 +37,14 @@ import { avatar } from "@/components/avatar";
 import { skeleton } from "@/components/skeleton";
 
 import { mapActions } from "vuex";
+
 export default {
   components: {
     comment,
     toogler,
     avatar,
     skeleton
+
     // toogler: () => import("@/components/toogler"),
     // comment: () => import("@/components/comment")
   },
