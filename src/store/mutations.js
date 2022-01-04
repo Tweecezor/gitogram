@@ -55,5 +55,17 @@ export default {
       return repo;
     });
     // }
+  },
+  SET_USER_REPOS(state, payload) {
+    if (payload) {
+      console.log(payload);
+      state.userRepos = payload;
+    }
+  },
+
+  SET_USER_FOLLOWING(state, payload) {
+    if (payload) {
+      state.userFollowing = payload;
+    }
   }
 };

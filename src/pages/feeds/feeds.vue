@@ -8,13 +8,16 @@
           </h1>
         </div>
         <div class="topline__actions">
-          <div class="topline__icon mr-28">
-            <icon icon-name="home" />
+          <div class="topline__icon mr-28 icon">
+            <icon icon-name="home" @click="$router.push({ name: 'Home' })" />
           </div>
-          <div class="topline__avatar mr-24">
-            <avatar :avatar="user.avatar_url" />
+          <div class="topline__avatar mr-24 icon">
+            <avatar
+              :avatar="user.avatar_url"
+              @click="$router.push({ name: 'Repos' })"
+            />
           </div>
-          <div class="topline__icon mt-4">
+          <div class="topline__icon mt-4 icon">
             <icon icon-name="exit" @click="logout" />
           </div>
         </div>
@@ -59,6 +62,7 @@
             :issues="item.issues"
             :repo="item.name"
             :owner="item.owner.login"
+            :date="item.updated_at"
           >
             <template #card>
               <card
@@ -117,6 +121,7 @@ export default {
       user: state => state.user,
       starred: state => state.starred
     }),
+
     ...mapGetters(["getUnStarredOnly"])
   },
 
@@ -168,11 +173,12 @@ export default {
   }
 }
 
-.button {
-  width: 270px;
-}
-
-.slide {
-  width: 375px;
+.icon {
+  transition: all 0.3s;
+  :hover {
+    cursor: pointer;
+    color: var(--green);
+    transition: all 0.3s;
+  }
 }
 </style>

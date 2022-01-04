@@ -1,9 +1,6 @@
 <template>
-  <div class="avatar">
-    <img
-      :src="avatar"
-      alt="users avatar"
-    >
+  <div class="avatar" :style="avatarStyle">
+    <img :src="avatar" alt="users avatar" />
   </div>
 </template>
 
@@ -13,10 +10,30 @@ export default {
     avatar: {
       type: String,
       required: true
+    },
+    size: {
+      type: String,
+      default: "s"
     }
   },
-  setup() {
-    return {};
+  setup(props) {
+    const style = {
+      s: {
+        width: "44px",
+        height: "44px"
+      },
+      m: {
+        width: "72px",
+        height: "72px"
+      },
+      l: {
+        width: "90px",
+        height: "90px"
+      }
+    };
+    const avatarStyle = style[props.size];
+    console.log(avatarStyle);
+    return { avatarStyle };
   }
 };
 </script>

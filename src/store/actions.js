@@ -142,3 +142,20 @@ export const getIssues = async function({ commit }, { owner, repo, repoId }) {
     });
   }
 };
+
+export const getUserRepos = async function({ commit }) {
+  try {
+    const { data } = await user.getUserRepos();
+    console.log(data);
+    commit("SET_USER_REPOS", data);
+  } catch (error) {}
+};
+
+export const getUserFollowing = async function({ commit }) {
+  try {
+    const { data } = await user.getUserFollowing();
+    commit("SET_USER_FOLLOWING", data);
+  } catch (error) {
+    console.log(error);
+  }
+};

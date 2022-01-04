@@ -9,7 +9,9 @@ import {
   starRepo,
   unStarRepo,
   getStarred,
-  getIssues
+  getIssues,
+  getUserRepos,
+  getUserFollowing
 } from "./actions";
 import { getRepoById, getUnStarredOnly } from "./getters";
 import mutations from "./mutations";
@@ -18,7 +20,9 @@ export default createStore({
   state: {
     trendings: [],
     user: {},
-    starred: []
+    starred: [],
+    userRepos: [],
+    userFollowing: []
   },
   actions: {
     getTrendings,
@@ -29,7 +33,9 @@ export default createStore({
     starRepo,
     unStarRepo,
     getStarred,
-    getIssues
+    getIssues,
+    getUserRepos,
+    getUserFollowing
   },
   mutations,
   getters: { getRepoById, getUnStarredOnly }

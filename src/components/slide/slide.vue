@@ -1,12 +1,13 @@
 <template>
   <div class="slide" :class="{ slide_active: active }">
     <div class="container slide__head mb-12">
-      <Progress class="mb-12" active />
+      <Progress class="mb-12" :active="!loading" />
       <User :src="data.avatar" :name="data.username" />
     </div>
     <div class="primaryLine" />
     <div class="slide__content" :class="{ slide__content_loading: loading }">
       <div class="container">
+        <pre>{{ loading }}</pre>
         <div v-if="loading" class="loading">
           <loader />
           Загрузка...

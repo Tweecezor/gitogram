@@ -1,10 +1,10 @@
 <template>
   <div class="user">
-    <Avatar
-      class="user__avatar mr-12"
-      :avatar="src"
-    />
-    <span class="user__name">{{ name }}</span>
+    <Avatar class="user__avatar mr-12" :avatar="src" :size="size" />
+    <div>
+      <div class="user__name mb-4">{{ name }}</div>
+      <div class="user__type">{{ type }}</div>
+    </div>
   </div>
 </template>
 
@@ -22,6 +22,14 @@ export default {
     name: {
       type: String,
       default: "John Doe"
+    },
+    type: {
+      type: String,
+      default: "User"
+    },
+    size: {
+      type: String,
+      default: "s"
     }
   },
   setup(props) {
@@ -41,8 +49,12 @@ export default {
   }
 
   &__avatar {
-    width: 44px;
-    height: 44px;
+    /* width: 44px;
+    height: 44px; */
+  }
+  &__type {
+    font-size: 12px;
+    color: var(--lightGrey);
   }
 }
 </style>

@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="feed__date">
-      25 May
+      {{ humanReadableDate }}
     </div>
   </div>
 </template>
@@ -73,6 +73,10 @@ export default {
     hasIssues: {
       type: Boolean
       // required: true
+    },
+    date: {
+      type: Date,
+      required: true
     }
   },
   setup() {
@@ -83,6 +87,12 @@ export default {
       show: false,
       currentId: ""
     };
+  },
+  computed: {
+    humanReadableDate() {
+      const date = new Date(this.date);
+      return date.toLocaleString("en-EN", { month: "short", day: "numeric" });
+    }
   },
   methods: {
     ...mapActions(["getIssues"]),

@@ -1,13 +1,6 @@
-/* eslint-disable vue/max-attributes-per-line */
 <template>
-  <div
-    class="progress "
-    :class="{ active }"
-  >
-    <div
-      ref="indicator"
-      class="indicator"
-    />
+  <div class="progress " :class="{ active }">
+    <div ref="indicator" class="indicator" />
   </div>
 </template>
 
@@ -15,19 +8,17 @@
 import { ref, onMounted, onBeforeUnmount } from "vue";
 export default {
   props: {
-    active: {
-      type: Boolean,
-      default: false
-    }
+    // active: {
+    //   type: Boolean,
+    //   default: false
+    // }
   },
   emits: ["onFinish"],
 
   setup(props, { emit }) {
-    // const active = ref(false);
-    console.log(props.active);
     const indicator = ref(null);
+    const active = ref(false);
     const emitOnFinish = function() {
-      console.log("kjlhbgv");
       emit("onFinish");
     };
 
@@ -35,9 +26,9 @@ export default {
       indicator.value.addEventListener("transitionend", emitOnFinish);
     });
 
-    // setTimeout(() => {
-    //   active.value = true;
-    // }, 1000);
+    setTimeout(() => {
+      active.value = true;
+    }, 1000);
     // nextTick(() => {
     //   active.value = true;
     // });
@@ -67,7 +58,7 @@ export default {
 }
 
 .indicator {
-  background: #31ae54;
+  background: var(--green);
   /* height: 2px; */
   position: absolute;
   top: 0;

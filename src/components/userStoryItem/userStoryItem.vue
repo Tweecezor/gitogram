@@ -1,10 +1,7 @@
 <template>
   <div class="userStoryItem">
-    <button
-      class="userStoryItem__button"
-      @click="onPress"
-    >
-      <avatar :avatar="avatar" />
+    <button class="userStoryItem__button" @click="onPress">
+      <avatar :avatar="avatar" size="l" />
     </button>
     <div class="username">
       {{ username }}
@@ -48,7 +45,7 @@ export default {
     border: 2px solid #a6328d;
     border-radius: 50%;
     padding: 4px;
-    max-width: 92px;
+    /* max-width: 92px; */
     margin-bottom: 10px;
     transition: border-color 0.2s;
 
