@@ -12,7 +12,8 @@
             <icon icon-name="home" @click="$router.push({ name: 'Home' })" />
           </div>
           <div class="topline__avatar mr-24 icon">
-            <avatar :avatar="userInfo.avatar_url" />
+            <avatar v-if="userInfo.avatar_url" :avatar="userInfo.avatar_url" />
+            <Skeleton v-else :width="44" :height="44" circle />
           </div>
           <div class="topline__icon mt-4 icon">
             <icon icon-name="exit" @click="logout" />
@@ -25,10 +26,12 @@
         <h1 class="mb-36">My profile</h1>
         <div class="profile__info">
           <avatar
+            v-if="userInfo.avatar_url"
             class="profile__avatar mr-20"
             :avatar="userInfo.avatar_url"
             size="l"
           />
+          <Skeleton v-else :width="90" :height="90" circle />
           <div class="profile__user__info ">
             <h2 class="profile__user_login mb-6">
               {{ userInfo.login }}
@@ -75,6 +78,7 @@
 import { topline } from "@/components/topline";
 import { avatar } from "@/components/avatar";
 import { icon } from "@/components/icon";
+import { skeleton as Skeleton } from "@/components/skeleton";
 // import { feed } from "@/components/feed";
 // import { card } from "@/components/card";
 
@@ -84,7 +88,8 @@ export default {
   components: {
     topline,
     icon,
-    avatar
+    avatar,
+    Skeleton
     // feed,
     // card
   },

@@ -1,5 +1,4 @@
 import { trendings, readme, auth, user, starred, issuesModule } from "@/API";
-import axios from "axios";
 
 export const getTrendings = async function({ commit, getters, dispatch }) {
   try {

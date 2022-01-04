@@ -13,7 +13,12 @@
           class="repo__item following mb-32"
         >
           <div>
-            <user size="m" />
+            <user
+              size="m"
+              :name="item.login"
+              :src="item.avatar_url"
+              :type="item.type"
+            />
           </div>
           <div>
             <Button>
