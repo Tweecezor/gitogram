@@ -59,9 +59,8 @@ export default {
 
   async setup(props) {
     const store = useStore();
-    // const router = useRouter();
+
     const route = useRoute();
-    // console.log(router);
 
     const initialSlide = Number(route.params.initialSlide);
 
@@ -90,7 +89,6 @@ export default {
           repo: name
         });
       } catch (error) {
-        console.log(error);
       } finally {
         loading.value = false;
       }
@@ -139,12 +137,10 @@ export default {
     handleSlide(initialIndex);
 
     const starRepo = function(repoId) {
-      console.log("hereq");
       store.dispatch("starRepo", repoId);
     };
 
     const unStarRepo = function(repoId) {
-      console.log("unstar");
       store.dispatch("unStarRepo", repoId);
     };
     // await fetchTrendings();

@@ -1,6 +1,5 @@
 export default {
   SET_TRANDINGS(state, trendings) {
-    console.log(trendings);
     if (trendings) {
       state.trendings = trendings.map(item => {
         item.following = {
@@ -58,7 +57,6 @@ export default {
   },
   SET_USER_REPOS(state, payload) {
     if (payload) {
-      console.log(payload);
       state.userRepos = payload;
     }
   },

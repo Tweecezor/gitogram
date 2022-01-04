@@ -5,11 +5,6 @@ export const getTrendings = async function({ commit, getters, dispatch }) {
   try {
     const { data } = await trendings.getTrendings();
     commit("SET_TRANDINGS", data.items);
-    // const unStarredRepos = getters.getUnStarredOnly();
-    // console.log(unStarredRepos);
-    // if (!unStarredRepos.length) {
-    //   dispatch.getTrendings({ page: 2 });
-    // }
   } catch (error) {
     console.log(error);
   }
@@ -24,8 +19,6 @@ export const getReadme = async function(
   try {
     const { data } = await readme.getReadme({ owner, repo });
 
-    console.log(data);
-    console.log(id);
     commit("SET_README", { id, readme: data });
   } catch (error) {
     console.log(error);
@@ -35,7 +28,7 @@ export const getReadme = async function(
 export const authUserByCode = async function(store, code) {
   try {
     const { data } = await auth.getAccessTokenByPersonalCode(code);
-    console.log(data);
+
     return data.token;
   } catch (error) {
     console.log(error);
@@ -43,10 +36,9 @@ export const authUserByCode = async function(store, code) {
 };
 
 export const getUser = async function({ commit }) {
-  console.log(axios.defaults.headers.Authorization);
   try {
     const { data } = await user.getUserData();
-    console.log(data);
+
     commit("SET_USER", data);
   } catch (e) {
     console.log(e);
@@ -66,7 +58,6 @@ export const starRepo = async function({ commit, getters }, repoId) {
   });
   const { name: repo, owner } = getters.getRepoById(repoId);
   try {
-    // console.log(repo, owner);
     await starred.starRepo({ repo, owner: owner.login });
     commit("SET_FOLLOWING", {
       id: repoId,
@@ -93,7 +84,6 @@ export const unStarRepo = async function({ commit, getters }, repoId) {
   });
   const { name: repo, owner } = getters.getRepoById(repoId);
   try {
-    // console.log(repo, owner);
     await starred.unStarRepo({ repo, owner: owner.login });
     commit("SET_FOLLOWING", {
       id: repoId,
@@ -116,7 +106,6 @@ export const unStarRepo = async function({ commit, getters }, repoId) {
 export const getStarred = async function({ commit }) {
   const { data } = await starred.getStarred({ limit: 10 });
   commit("SET_STARRED", data);
-  console.log(data);
 };
 
 export const getIssues = async function({ commit }, { owner, repo, repoId }) {
@@ -126,7 +115,7 @@ export const getIssues = async function({ commit }, { owner, repo, repoId }) {
   });
   try {
     const { data } = await issuesModule.getIssues({ owner, repo });
-    console.log(data);
+
     commit("SET_ISSUES", {
       data: {
         data
@@ -146,7 +135,6 @@ export const getIssues = async function({ commit }, { owner, repo, repoId }) {
 export const getUserRepos = async function({ commit }) {
   try {
     const { data } = await user.getUserRepos();
-    console.log(data);
     commit("SET_USER_REPOS", data);
   } catch (error) {}
 };

@@ -4,7 +4,7 @@
 
 <script>
 import * as icons from "@/assets/icons";
-console.log(icons);
+
 export default {
   name: "Icon",
   components: {

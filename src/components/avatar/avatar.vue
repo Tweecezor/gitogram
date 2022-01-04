@@ -32,7 +32,7 @@ export default {
       }
     };
     const avatarStyle = style[props.size];
-    console.log(avatarStyle);
+
     return { avatarStyle };
   }
 };

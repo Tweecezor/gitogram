@@ -4,7 +4,6 @@ const baseURL = "https://api.github.com";
 
 const token = localStorage.getItem("token");
 if (token) {
-  console.log("here1");
   axios.defaults.headers.Authorization = `token ${token}`;
 }
 

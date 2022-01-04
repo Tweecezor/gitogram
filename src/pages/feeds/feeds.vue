@@ -146,15 +146,9 @@ export default {
 
   methods: {
     ...mapActions(["getTrendings", "getUser", "logout", "getStarred"]),
-    onPressAvatar(id) {
-      console.log(id);
-    },
-    handleClick() {
-      console.log("evnt in feeds");
-    },
+    onPressAvatar(id) {},
+    handleClick() {},
     goToRepo(fullname) {
-      console.log(fullname);
-      // window.location.href = ;
       window.open(`https://github.com/${fullname}`, "_blank");
     }
   }

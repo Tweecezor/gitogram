@@ -31,10 +31,10 @@ export default {
     };
 
     const code = new URLSearchParams(window.location.search).get("code");
-    console.log(code);
+
     if (code) {
       const token = await store.dispatch("authUserByCode", code);
-      console.log(token);
+
       localStorage.setItem("token", token);
       axios.defaults.headers.Authorization = `token ${token}`;
       router.push({ name: "Home" });

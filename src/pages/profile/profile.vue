@@ -93,14 +93,12 @@ export default {
     await store.dispatch("getUser");
     await store.dispatch("getUserRepos");
     await store.dispatch("getUserFollowing");
-    // console.log(store.state.user);
+
     const userRepos = computed(() => store.state.userRepos);
     const userInfo = computed(() => store.state.user);
     const userFollowing = computed(() => store.state.userFollowing);
-    // console.log(userRepos.value);
-    const logout = function() {
-      console.log("fdf");
-    };
+
+    const logout = function() {};
     return { userRepos, userInfo, logout, userFollowing };
   }
 };

@@ -47,9 +47,7 @@ export default {
   },
   emits: ["click"],
   setup(props, { emit }) {
-    // console.log(root);
     const handleClick = () => {
-      console.log("clicked");
       emit("click");
     };
     return { handleClick };
